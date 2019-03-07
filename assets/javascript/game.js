@@ -4,7 +4,8 @@ $(document).ready(function() {
     var characters = [{
         name: "Luke Skywalker",
         img: "https://place-hold.it/200x150",
-        hp: 100,
+        card: "",
+        hp: 1000,
         baseAtk: 8,
         counterAtk: 25
     },
@@ -34,15 +35,16 @@ $(document).ready(function() {
     var iPlayer, iEnemy, currentAtk;
     var characterSelected = false;
     var enemySelected = false;
+    var gameOver = false;
 
     // Create a card for each character and add them to the "Select Your Character" card
     //characters.forEach(fuction(theCharacter) {
     $.each(characters, function(i, theCharacter) {
         // Create the card div
-        var card = $("<div>");
-        card.addClass("card character-card");
-        card.attr("index", i);
-        card.css("display", "inline-block")
+        characters[i].card = $("<div>");
+        characters[i].card.addClass("card character-card");
+        characters[i].card.attr("index", i);
+        characters[i].card.css("display", "inline-block")
 
         // Add the character image
         var img = $("<img>");
@@ -51,12 +53,12 @@ $(document).ready(function() {
             "src": theCharacter.img,
             "alt": theCharacter.name
         });
-        card.append(img)
+        characters[i].card.append(img)
 
         // Add the card body
         var cardBody = $("<div>");
         cardBody.addClass("card-body");
-        card.append(cardBody);
+        characters[i].card.append(cardBody);
 
         // Add character name
         var nameTxt = $("<p>");
@@ -69,54 +71,87 @@ $(document).ready(function() {
         hpTxt.append($("<span>").addClass("hp-text").text(theCharacter.hp));
         cardBody.append(hpTxt);
 
-        $("#select-character-card > .card-body").append(card);
+        $("#select-character-card > .card-body").append(characters[i].card);
     })
 
     $(".character-card").on("click", function() {
-        // Check if Player's character has been selected
-        if (!characterSelected) {
-            characterSelected = true;
+        if(!gameOver) {
+            // Check if Player's character has been selected
+            if (!characterSelected) {
+                characterSelected = true;
 
-            // Store the selected character index
-            iPlayer = $(this).attr("index");
+                // Store the selected character index
+                iPlayer = $(this).attr("index");
 
-            // Move selected card to "Your Card"
-            $("#your-character-card > .card-body").append(this);
+                // Set the current attack power
+                currentAtk = characters[iPlayer].baseAtk;
 
-            // Move the other cards to "Remaining Opponents"
-            $("#remaining-enemies-card > .card-body").append($("#select-character-card > .card-body > .character-card"))
-        } else if (!enemySelected) {
-            // Check that enemy card was clicked
-            if($(this).attr("index") !== iPlayer) {
-                enemySelected = true;
+                // Move selected card to "Your Card"
+                $("#your-character-card > .card-body").append(this);
 
-                // Store the selected enemy index
-                iEnemy = $(this).attr("index")
+                // Move the other cards to "Remaining Opponents"
+                $("#remaining-enemies-card > .card-body").append($("#select-character-card > .card-body > .character-card"));
+            } else if (!enemySelected) {
+                // Check that enemy card was clicked
+                if($(this).attr("index") !== iPlayer) {
+                    enemySelected = true;
 
-                // Move the selected card to "Selected Opponent"
-                $("#current-enemy-card > .card-body").append(this);
+                    // Store the selected enemy index
+                    iEnemy = $(this).attr("index")
+
+                    // Move the selected card to "Selected Opponent"
+                    $("#current-enemy-card > .card-body").append(this);
+                }
             }
         }
     })
 
-    function attack(player, enemy) {
+    $("#attack-btn").on("click", function() {
         // Player attacks enemy
-        enemy.hp -= currentAtk;
+        characters[iEnemy].hp -= currentAtk;
 
         // Check if enemy is dead
-        if (enemy.hp <= 0) {
+        if (characters[iEnemy].hp <= 0) {
+            // Ensure negative HP is not displayed
+            characters[iEnemy].hp = 0;
 
+            // Select a new enemy
+            enemySelected = false;
+
+            // Show enemy is defeated
+            characters[iEnemy].card.remove();
+            
+            // Check if any enemies remaining
+            if ($("#remaining-enemies-card > .card-body").children().length <= 0) {
+                endGame(true);
+            }
+            
+            return
         }
+        // Update HP text
+        $(characters[iEnemy].card).find(".hp-text").text(characters[iEnemy].hp);
 
         // Enemy attacks player
-        player.hp -= enemy.counterAtk;
+        characters[iPlayer].hp -= characters[iEnemy].counterAtk;
 
         // Check if player is dead
-        if (player.hp <= 0) {
+        if (characters[iPlayer].hp <= 0) {
+            // Ensure negative HP is not displayed
+            characters[iPlayer].hp = 0;
 
+            // Player loses
+            endGame(false);
         }
 
+        // Update HP text
+        $(characters[iPlayer].card).find(".hp-text").text(characters[iPlayer].hp);
+
+
         // Increase player attack power
-        currentAtk += player.baseAtk;
+        currentAtk += characters[iPlayer].baseAtk;
+    })
+
+    function endGame(win) {
+        console.log(win);
     }
 })

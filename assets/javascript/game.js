@@ -103,6 +103,11 @@ $(document).ready(function() {
                 $("#select-character-card").hide();
                 $("#your-character-card").show();
                 $("#remaining-enemies-card").show();
+
+                // Scroll to the select opponent card
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: $("#remaining-enemies-card").offset().top
+                }, 1000);
             } else if (!enemySelected) {
                 // Check that enemy card was clicked
                 if($(this).attr("index") !== iPlayer) {
@@ -123,6 +128,11 @@ $(document).ready(function() {
                     $("#current-enemy-card").show();
                     $("#attack-btn").show();
                     $("#attack-btn").prop("disabled", false);
+
+                    // Scroll to the your character card
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $("#your-character-card").offset().top
+                    }, 1000);
                 }
             }
         }
@@ -158,6 +168,11 @@ $(document).ready(function() {
                 endGame(true);
             } else {
                 $("#remaining-enemies-card > .card-header").text("Select Your Opponent");
+
+            // Scroll to the select opponent card
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#remaining-enemies-card").offset().top
+            }, 1000);
             }
         } else {
             // Update HP text

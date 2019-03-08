@@ -4,9 +4,9 @@ $(document).ready(function() {
     var characters = [{
         name: "Luke Skywalker",
         img: "assets/images/Luke_Skywalker.png",
-        hp: 1000,
-        baseAtk: 8,
-        counterAtk: 25
+        hp: 100,
+        baseAtk: 15,
+        counterAtk: 5
     },
     {
         name: "Obi-Wan Kenobi",
@@ -14,20 +14,20 @@ $(document).ready(function() {
 
         hp: 120,
         baseAtk: 8,
-        counterAtk: 25
+        counterAtk: 10
     },
     {
         name: "Darth Vader",
         img: "assets/images/Darth_Vader.png",
         hp: 180,
-        baseAtk: 8,
-        counterAtk: 25
+        baseAtk: 4,
+        counterAtk: 20
     },
     {
         name: "Emperor Palpatine",
         img: "assets/images/Emperor_Palpatine.png",
         hp: 150,
-        baseAtk: 8,
+        baseAtk: 6,
         counterAtk: 25
     }];
 
@@ -191,11 +191,14 @@ $(document).ready(function() {
     })
 
     function endGame(win) {
+        // Update attack text
         if (win) {
             $("#counter-attack-txt").text("You have defeated all opponents. You win!");
         } else {
             $("#attack-txt").text("You have been defeated.");
         }
+
+        // Change buttons
         $("#attack-btn").prop("disabled", true);
         $("#play-again-btn").show();
     }

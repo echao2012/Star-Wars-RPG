@@ -4,7 +4,7 @@ html {
         -moz-backgound-size: cover;
         -o-background-size: cover;
         background-size: cover;
-    background-color: rgba(92, 92, 92, 0.5);
+    background-color: rgba(92, 92, 92, 0.9);
     background-blend-mode: multiply;
 }
 
@@ -13,10 +13,18 @@ body {
     background-color: transparent;
 }
 
-#main-header{
-    font-size: 56px;
+/* Title */
+
+#main-header {
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    font-size: 80px;
+    font-family: 'Star Jedi';
     color: rgba(236, 205, 0, 1);
 }
+
+/* Cards */
 
 .character-group {
     min-height: 396px;
@@ -25,6 +33,7 @@ body {
 }
 
 .character-group-title {
+    font-family: 'Distant Galaxy';
     background-color: rgba(236, 205, 0);
     color: black;
 }
@@ -33,8 +42,11 @@ body {
     display: inline-block;
     margin: 10px;
     font-size: 18px;
+    font-weight: bold;
     background-color:rgb(50, 50, 50);
 }
+
+/* Attack Text */
 
 #attack-txt,
 #counter-attack-txt {
@@ -43,6 +55,8 @@ body {
     font-weight: bold;
     color: rgba(236, 205, 0, 1);
 }
+
+/* Buttons */
 
 #attack-btn {
     width: 100px;
@@ -56,4 +70,16 @@ body {
     margin: 10px;
     font-weight: bold;
     background-color: rgba(236, 205, 0, 1);
+}
+
+/* Fonts */
+
+@font-face {
+    font-family: 'Star Jedi';
+    src: url(../fonts/Starjedi.ttf);
+}
+
+@font-face {
+    font-family: 'Distant Galaxy';
+    src: url(../fonts/DistantGalaxy.ttf);
 }

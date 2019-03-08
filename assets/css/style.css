@@ -19,6 +19,7 @@ body {
 }
 
 .character-group {
+    min-height: 396px;
     background-color: rgba(0, 0, 0, 0.8);
     color: rgba(236, 205, 0, 1);
 }
@@ -30,8 +31,7 @@ body {
 
 .character-card {
     display: inline-block;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 10px;
     font-size: 18px;
     background-color:rgb(50, 50, 50);
 }
@@ -50,4 +50,10 @@ body {
     padding-bottom: 10px;
     border-radius: 50px;
     font-size: 25px;
+}
+
+#play-again-btn {
+    margin: 10px;
+    font-weight: bold;
+    background-color: rgba(236, 205, 0, 1);
 }

@@ -43,6 +43,7 @@ $(document).ready(function() {
     $("#current-enemy-card").hide();
     $("#remaining-enemies-card").hide();
     $("#attack-btn").hide();
+    $("#play-again-btn").hide();
     
     // Create a card for each character and add them to the "Select Your Character" card
     //characters.forEach(fuction(theCharacter) {
@@ -113,9 +114,15 @@ $(document).ready(function() {
                     // Move the selected card to "Selected Opponent"
                     $("#current-enemy-card > .card-body").append(this);
 
+                    // Update attack text
+                    $("#attack-txt").text("You are now fighting " + characters[iEnemy].name + ".");
+                    $("#counter-attack-txt").text("");
+
                     // Show attack button and enemy
+                    $("#remaining-enemies-card > .card-header").text("Remaining Opponents");
                     $("#current-enemy-card").show();
                     $("#attack-btn").show();
+                    $("#attack-btn").prop("disabled", false);
                 }
             }
         }
@@ -125,7 +132,7 @@ $(document).ready(function() {
         // Player attacks enemy
         characters[iEnemy].hp -= currentAtk;
 
-        // Update text
+        // Update attack text
         $("#attack-txt").text("You attacked for " + currentAtk + " damage.");
 
         // Check if enemy is dead
@@ -136,12 +143,21 @@ $(document).ready(function() {
             // Select a new enemy
             enemySelected = false;
 
+            // Disable attack button
+            $("#attack-btn").prop("disabled", true);
+
             // Show enemy is defeated
             characters[iEnemy].card.remove();
+
+            // Update attack text
+            $("#attack-txt").text("You have defeated " + characters[iEnemy].name + "!");
+            $("#counter-attack-txt").text("Select a new opponent.");
             
             // Check if any enemies remaining
             if ($("#remaining-enemies-card > .card-body").children().length <= 0) {
                 endGame(true);
+            } else {
+                $("#remaining-enemies-card > .card-header").text("Select Your Opponent");
             }
         } else {
             // Update HP text
@@ -150,7 +166,7 @@ $(document).ready(function() {
             // Enemy attacks player
             characters[iPlayer].hp -= characters[iEnemy].counterAtk;
 
-            // Update text
+            // Update attack text
             $("#counter-attack-txt").text(characters[iEnemy].name + " attacked you for " + characters[iEnemy].counterAtk + " damage.");
 
             // Check if player is dead
@@ -169,8 +185,18 @@ $(document).ready(function() {
         // Increase player attack power
         currentAtk += characters[iPlayer].baseAtk;
     })
+    
+    $("#play-again-btn").on("click", function() {
+        location.reload();
+    })
 
     function endGame(win) {
-        console.log(win);
+        if (win) {
+            $("#counter-attack-txt").text("You have defeated all opponents. You win!");
+        } else {
+            $("#attack-txt").text("You have been defeated.");
+        }
+        $("#attack-btn").prop("disabled", true);
+        $("#play-again-btn").show();
     }
 })

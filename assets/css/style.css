@@ -1,0 +1,53 @@
+html {
+    background: url(../images/background.png) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-backgound-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    background-color: rgba(92, 92, 92, 0.5);
+    background-blend-mode: multiply;
+}
+
+body {
+    background: none;
+    background-color: transparent;
+}
+
+#main-header{
+    font-size: 56px;
+    color: rgba(236, 205, 0, 1);
+}
+
+.character-group {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: rgba(236, 205, 0, 1);
+}
+
+.character-group-title {
+    background-color: rgba(236, 205, 0);
+    color: black;
+}
+
+.character-card {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 18px;
+    background-color:rgb(50, 50, 50);
+}
+
+#attack-txt,
+#counter-attack-txt {
+    min-height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(236, 205, 0, 1);
+}
+
+#attack-btn {
+    width: 100px;
+    height: 100px;
+    padding-bottom: 10px;
+    border-radius: 50px;
+    font-size: 25px;
+}

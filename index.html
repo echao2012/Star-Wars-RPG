@@ -21,32 +21,52 @@
 <body>
     <div class="container">
 
+        <!-- Title -->
+        <h1 class="text-center" id="main-header">Star Wars RPG</h1>
+
         <!-- Select character  -->
-        <div class="card" id="select-character-card">
-            <h3 class="card-header text-center">Select Your Character</h3>
+        <div class="card text-center mt-3 mb-3 character-group" id="select-character-card">
+            <h3 class="card-header text-center character-group-title">Select Your Character</h3>
             <div class="card-body"></div>
         </div>
 
-        <!-- Player's character -->
-        <div class="card" id="your-character-card">
-            <h3 class="card-header text-center">Your Character</h3>
-            <div class="card-body"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Player's character -->
+                <div class="card text-center mt-3 mb-3 character-group" id="your-character-card">
+                    <h3 class="card-header text-center character-group-title">Your Character</h3>
+                    <div class="card-body"></div>
+                </div>
+            </div>
+
+            <div class="col-md-4 d-flex align-items-center">
+                <!-- Attack button -->
+                <button type="button" class="btn btn-danger mx-auto" id="attack-btn">Attack</button>
+            </div>
+
+            <!-- Current enemy -->
+            <div class="col-md-4">
+                <div class="card text-center mt-3 mb-3 character-group" id="current-enemy-card">
+                    <h3 class="card-header text-center character-group-title">Selected Opponent</h3>
+                    <div class="card-body"></div>
+                </div>
+            </div>
         </div>
 
-        <!-- Current enemy -->
-        <div class="card" id="current-enemy-card">
-            <h3 class="card-header text-center">Selected Opponent</h3>
-            <div class="card-body"></div>
-        </div>
+        <p class="text-center" id="attack-txt"></p>
+        <p class="text-center" id="counter-attack-txt"></p>
 
-        <!-- Remaining enemies -->
-        <div class="card" id="remaining-enemies-card">
-            <h3 class="card-header text-center">Remaining Opponents</h3>
-            <div class="card-body"></div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <!-- Remaining enemies -->
+                <div class="card text-center mt-3 mb-3 character-group" id="remaining-enemies-card">
+                    <h3 class="card-header text-center character-group-title">Remaining Opponents</h3>
+                    <div class="card-body"></div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
         </div>
-
-        <!-- Attack button -->
-        <button type="button" class="btn btn-danger" id="attack-btn">Attack</button>
     </div>
 
     <!-- Link to external Javascript -->

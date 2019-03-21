@@ -1,4 +1,5 @@
 # Star Wars RPG
+**Play the game here: https://echao2012.github.io/Star-Wars-RPG/**
 
 This is an RPG style game with a Star Wars theme. 
 
